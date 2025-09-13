@@ -1,0 +1,86 @@
+.trainer-main{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    background-color: beige;
+}
+#nsp{
+    height: 500px;
+    width: 500px;
+}
+.name{
+    font-size: 3rem;
+}
+.name1{
+    margin-top: 7rem;
+    font-size: 3rem;
+}
+.name2{
+    margin-top: 7rem;
+    font-size: 3rem;
+}
+.name3{
+    margin-top: 7rem;
+    font-size: 3rem;
+}
+.name4{
+    margin-top: 7rem;
+    font-size: 3rem;
+}
+.name5{
+    margin-top: 7rem;
+    font-size: 3rem;
+}
+.about-t{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box1{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.Right{
+    width: 40%;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+#abt{
+    margin-left: -3rem;
+    font-size: 1.4rem;
+}
+.box2{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box3{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box4{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box5{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box6{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+} 
+#ex{
+    font-size: 3rem;
+}
+#fee{
+    font-size: 2.5rem;
+}

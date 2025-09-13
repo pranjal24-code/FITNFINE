@@ -1,0 +1,137 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: black; */
+    background-image: url('./Gym-bg.jpeg');
+    width: 100%;
+    height: 100%;
+    gap: 10rem;
+    color: white;
+}
+.chest{
+    display: flex;
+    flex-direction: column;
+}
+.chest-h{
+    margin-left: 7rem;
+    margin-top: 3rem;
+    font-style: italic;
+}
+.workout-chest{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+.flex{
+    display: flex;
+    gap: 6rem;
+}
+.img{
+    margin-top: 1rem;
+    width: 300px;
+    height: 300px;
+}
+.back{
+    display: flex;
+    flex-direction: column;
+}
+.back-h{
+    margin-left: 12rem;
+    margin-top: 3rem;
+    font-style: italic;
+}
+.workout-back{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+.legs{
+    display: flex;
+    flex-direction: column;
+}
+.leg-h{
+    margin-left: 12rem;
+    margin-top: 3rem;
+    font-style: italic;
+}
+.workout-leg{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}    
+.bicep{
+    display: flex;
+    flex-direction: column;
+}
+.bicep-h{
+    margin-left: 12rem;
+    margin-top: 3rem;
+    font-style: italic;
+    border-bottom: 5px solid white;
+}
+.workout-bicep{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}   
+.triceps{
+    display: flex;
+    flex-direction: column;
+}
+.triceps-h{
+    margin-left: 12rem;
+    margin-top: 3rem;
+    font-style: italic;
+    border-bottom: 5px solid white;
+}
+.workout-tricep{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+} 
+.shoulder{
+    display: flex;
+    flex-direction: column;
+}
+.shoulder-h{
+    margin-left: 12rem;
+    margin-top: 3rem;
+    font-style: italic;
+    border-bottom: 5px solid white;
+}
+.workout-shoulder{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+.abs{
+    display: flex;
+    flex-direction: column;
+}
+.abs-h{
+    margin-left: 8rem;
+    margin-top: 3rem;
+    font-style: italic;
+    border-bottom: 5px solid white;
+}
+.workout-abs{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}

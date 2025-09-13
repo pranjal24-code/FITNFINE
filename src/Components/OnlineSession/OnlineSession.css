@@ -1,0 +1,218 @@
+/* General Page */
+.session-page {
+  color: #fff;
+  background: #000;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+/* ---------------- Hero Section ---------------- */
+.session-hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: url('/session-bg.jpg') center/cover no-repeat;
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 4rem;
+}
+.session-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  border-radius: 12px;
+}
+.session-hero h1,
+.session-hero p,
+.session-hero .book-btn {
+  position: relative;
+  z-index: 1;
+}
+.session-hero h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  color: #fff;
+}
+.session-hero h1 span {
+  color: #ff1a1a;
+}
+.session-hero p {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: #ddd;
+}
+.book-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #e60000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.book-btn:hover {
+   background: #e60000;
+  transform: scale(1.08);
+}
+
+/* ---------------- Upcoming Sessions ---------------- */
+.upcoming-sessions {
+  margin-top: 2rem;
+  text-align: center;
+}
+.upcoming-sessions h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ff1a1a;
+}
+.sessions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.session-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 260px;
+  text-align: center;
+  transition: transform .2s, background .3s;
+}
+.session-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.1);
+}
+.session-card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+}
+.session-card p {
+  color: #bbb;
+  margin: 0.6rem 0;
+}
+.join-btn {
+  padding: 0.6rem 1.2rem;
+  background: #ff1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.join-btn:hover {
+   background: #e60000;
+  transform: scale(1.05);
+}
+
+/* ---------------- Booking Form ---------------- */
+.booking-form {
+  margin-top: 5rem;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+}
+.booking-form h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ff1a1a;
+}
+.booking-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.booking-form input,
+.booking-form select {
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.booking-form input::placeholder {
+  color: #aaa;
+}
+.submit-btn {
+  padding: 0.9rem;
+  background: #ff1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.submit-btn:hover {
+  background: #e60000;
+  transform: scale(1.05);
+}
+
+/* ---------------- Recorded Sessions ---------------- */
+.recorded-sessions {
+  margin-top: 5rem;
+  text-align: center;
+}
+.recorded-sessions h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ff1a1a;
+}
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.video-list iframe {
+  width: min(100%, 500px);
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .session-hero h1 {
+    font-size: 2.2rem;
+  }
+  .sessions-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .video-list iframe {
+    width: 100%;
+  }
+}
+
+/* Member Toggle */
+.member-toggle {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: #ccc;
+}
+.member-toggle label {
+  cursor: pointer;
+}
+.member-toggle input {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
