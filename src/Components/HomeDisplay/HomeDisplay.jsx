@@ -7,39 +7,72 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AboutGYM from '../AboutGYM/AboutGYM'
 import { useEffect } from 'react'
+import HeroSlider from '../HeroSlider/HeroSlider'
 
 
 
 
 const HomeDisplay = () => {
 
-  const slides = [
-    { id: 1, img: assets.Abhishek, alt: "Abhishek" },
-    { id: 2, img: assets.Ayush, alt: "Ayush" },
-    { id: 3, img: assets.Shubham, alt: "Shubham" },
-    { id: 4, img: assets.Bhushan, alt: "Bhushan" },
-  ];
+  // const slides = [
+  //   { id: 1, img: assets.Abhishek, alt: "Abhishek" },
+  //   { id: 2, img: assets.Ayush, alt: "Ayush" },
+  //   { id: 3, img: assets.Shubham, alt: "Shubham" },
+  //   { id: 4, img: assets.Bhushan, alt: "Bhushan" },
+  // ];
 
-  const [current, setCurrent] = useState(0);
+  //  const [isVisible, setIsVisible] = useState(false)
 
-  // Auto slide every 4 sec
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+   const slides = [
+    {
+      id: 1,
+      img: assets.Abhishek,
+      alt: "Abhishek",
+      title: "Push Your Limits 💪",
+      text: "Join the Fit n Fine Gym and transform your lifestyle today."
+    },
+    {
+      id: 2,
+      img: assets.Ayush,
+      alt: "Ayush",
+      title: "Train with the Best 🏋️",
+      text: "Professional trainers to guide your fitness journey."
+    },
+    {
+      id: 3,
+      img: assets.Shubham,
+      alt: "Shubham",
+      title: "Strength & Discipline 🔥",
+      text: "Get stronger, fitter, and more confident with us."
+    },
+    {
+      id: 4,
+      img: assets.Bhushan,
+      alt: "Bhushan",
+      title: "Your Fitness, Our Mission ❤️",
+      text: "We help you stay consistent and achieve your goals."
+    }
+  ]
 
-  // Manual navigation
-  const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+  // const [current, setCurrent] = useState(0);
 
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-  };
 
-  
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrent((prev) => (prev + 1) % slides.length);
+  //   }, 4000);
+  //   return () => clearInterval(timer);
+  // }, [slides.length]);
+
+ 
+  // const prevSlide = () => {
+  //   setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  // };
+
+  // const nextSlide = () => {
+  //   setCurrent((prev) => (prev + 1) % slides.length);
+  // };
+ 
    
 
 const navigate = useNavigate()  
@@ -116,28 +149,12 @@ const [isVisible, setIsVisible] = useState(false);
         <button onClick={()=> navigate('./Online')} id='JJ1'>Online Session</button>
       </div>
     </div>
+
+    <HeroSlider slides={slides} />
   
-  {/* <section className='container'>
-            <div className="slide-wrapper">
-              <div className="slider">
-                <img id='#1' src={assets.Abhishek} alt="" />
-                <img id='#2' src={assets.Ayush} alt="" />
-                <img id='#3' src={assets.Shubham} alt="" />
-                <img id='#4' src={assets.Bhushan} alt="" /> 
-              </div>
-              <div className="slider-nav">
-                <a href="#slider-1"></a>
-                <a href="#slider-2"></a>
-                <a href="#slider-3"></a>
-                <a href="#slider-4"></a>
-              </div>
-            </div>
-  </section> */}
 
-
-  <section className="slider-container">
+  {/* <section className="slider-container">
       <div className="slider-wrapper">
-        {/* Slides */}
         <div
           className="slider-track"
           style={{ transform: `translateX(-${current * 100}%)` }}
@@ -152,17 +169,14 @@ const [isVisible, setIsVisible] = useState(false);
           ))}
         </div>
 
-        {/* Left arrow */}
         <button className="nav-btn left" onClick={prevSlide}>
           &#10094;
         </button>
 
-        {/* Right arrow */}
         <button className="nav-btn right" onClick={nextSlide}>
           &#10095;
         </button>
 
-        {/* Navigation dots */}
         <div className="dots">
           {slides.map((_, index) => (
             <span
@@ -173,7 +187,7 @@ const [isVisible, setIsVisible] = useState(false);
           ))}
         </div>
       </div>
-    </section>
+    </section> */}
 
 
     

@@ -47,7 +47,7 @@ const Contact = () => {
           required
           className='ipp'
           type="text"
-          placeholder='Enter your name'
+          placeholder="Enter your name"
         />
 
         <label id='t1' htmlFor="email">Email:</label>
@@ -58,7 +58,7 @@ const Contact = () => {
           required
           className='ipp'
           type="email"
-          placeholder='Enter email'
+          placeholder = "Enter Your Mail"
         />
 
         <label id='t1' htmlFor="message">Message:</label>
