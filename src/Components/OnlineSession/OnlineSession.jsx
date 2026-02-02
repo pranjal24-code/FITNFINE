@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import api from "../../api"; // axios instance
 import "./OnlineSession.css";
 
 export default function OnlineSession() {
   const [isMember, setIsMember] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     session: "",
     memberId: "",
   });
@@ -14,21 +18,42 @@ export default function OnlineSession() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isMember) {
-      alert(`Welcome back, Member ✅
-Email/ID: ${formData.memberId}
-Session: ${formData.session}`);
-    } else {
-      alert(`Booking Confirmed ✅
-Name: ${formData.name}
-Email: ${formData.email}
-Session: ${formData.session}`);
+    // Prepare payload for backend
+    const payload = {
+      full_name: isMember ? "Existing Member" : formData.name,
+      email: isMember ? formData.memberId : formData.email,
+      phone: "",
+      session: formData.session,
+    };
+
+    if (!payload.session) {
+      alert("Please select a session");
+      return;
     }
 
-    setFormData({ name: "", email: "", session: "", memberId: "" });
+    try {
+      setLoading(true);
+
+      const res = await api.post("/online-session", payload);
+
+      alert(res.data.message || "Session booked successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        session: "",
+        memberId: "",
+      });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to book session");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -51,17 +76,14 @@ Session: ${formData.session}`);
           <div className="session-card">
             <h3>HIIT Blast</h3>
             <p>Monday, 7:00 AM</p>
-            <button className="join-btn">Join Now</button>
           </div>
           <div className="session-card">
             <h3>Strength Training</h3>
             <p>Wednesday, 6:00 PM</p>
-            <button className="join-btn">Join Now</button>
           </div>
           <div className="session-card">
             <h3>Zumba Dance</h3>
             <p>Friday, 5:00 PM</p>
-            <button className="join-btn">Join Now</button>
           </div>
         </div>
       </section>
@@ -70,7 +92,6 @@ Session: ${formData.session}`);
       <section className="booking-form" id="booking">
         <h2>Book Your Session</h2>
 
-        {/* Member Toggle */}
         <div className="member-toggle">
           <label>
             <input
@@ -84,16 +105,14 @@ Session: ${formData.session}`);
 
         <form onSubmit={handleSubmit}>
           {isMember ? (
-            <>
-              <input
-                type="text"
-                name="memberId"
-                placeholder="Enter your Member ID or Email"
-                value={formData.memberId}
-                onChange={handleChange}
-                required
-              />
-            </>
+            <input
+              type="text"
+              name="memberId"
+              placeholder="Enter Email or Phone"
+              value={formData.memberId}
+              onChange={handleChange}
+              required
+            />
           ) : (
             <>
               <input
@@ -115,7 +134,6 @@ Session: ${formData.session}`);
             </>
           )}
 
-          {/* Session selection is common for both */}
           <select
             name="session"
             value={formData.session}
@@ -123,15 +141,19 @@ Session: ${formData.session}`);
             required
           >
             <option value="">Select Session</option>
-            <option value="HIIT Blast - Monday 7AM">HIIT Blast - Monday 7AM</option>
+            <option value="HIIT Blast - Monday 7AM">
+              HIIT Blast - Monday 7AM
+            </option>
             <option value="Strength Training - Wednesday 6PM">
               Strength Training - Wednesday 6PM
             </option>
-            <option value="Zumba Dance - Friday 5PM">Zumba Dance - Friday 5PM</option>
+            <option value="Zumba Dance - Friday 5PM">
+              Zumba Dance - Friday 5PM
+            </option>
           </select>
 
-          <button type="submit" className="submit-btn">
-            Confirm Booking
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Booking..." : "Confirm Booking"}
           </button>
         </form>
       </section>
