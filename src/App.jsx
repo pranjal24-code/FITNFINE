@@ -20,8 +20,9 @@ import Cont from './Components/Contact2/cont'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import OnlineSession from './Components/OnlineSession/OnlineSession'
-
-
+import AdminContact from './Components/Admin/AdminContact'
+import AdminJoin from './Components/Admin/AdminJoin'
+import AdminSessions from './Components/Admin/AdminSession'
 
 const App = () => {
   return (
@@ -52,6 +53,9 @@ const App = () => {
         <Route path='trainers' element={<Trainer/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/location' element={<Location/>}/>
+        <Route path="/admin/join" element={<AdminJoin />} />
+        <Route path="/admin/sessions" element={<AdminSessions />} />
+        <Route path="/admin/contact" element={<AdminContact />} />
       </Routes>
      </div>
 

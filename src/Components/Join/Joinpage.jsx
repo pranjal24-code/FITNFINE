@@ -49,10 +49,10 @@
 // export default Joinpage
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import api from "../../api"; // axios instance
 import "./joinpage.css";
+import JoinService from "../Services/JoinServies";
 
 const Joinpage = () => {
   const [formData, setFormData] = useState({
@@ -64,11 +64,6 @@ const Joinpage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  // 🔍 Check backend URL once
-  useEffect(() => {
-    console.log("Backend API:", import.meta.env.VITE_API_URL);
-  }, []);
-
   // Handle input change
   const handleChange = (e) => {
     setFormData({
@@ -77,7 +72,7 @@ const Joinpage = () => {
     });
   };
 
-  // Handle submit
+  // Handle submit ✅ (ONLY ONE)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,9 +84,10 @@ const Joinpage = () => {
     try {
       setLoading(true);
 
-      const res = await api.post("/join", formData);
+      const res = await JoinService.createJoinRequest(formData);
 
-      alert(res.data.message || "Join request submitted successfully!");
+
+      alert(res.message || "Joined successfully!");
 
       // Clear form
       setFormData({
@@ -110,7 +106,6 @@ const Joinpage = () => {
 
   return (
     <div className="join-page">
-      {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -124,7 +119,6 @@ const Joinpage = () => {
         Start your fitness journey today! Fill out the form below and our team will contact you.
       </p>
 
-      {/* Form */}
       <form className="join-card" onSubmit={handleSubmit}>
         <div className="join-card-content">
           <input
@@ -173,7 +167,6 @@ const Joinpage = () => {
         </div>
       </form>
 
-      {/* Contact Note */}
       <p className="join-contact">
         For any queries, reach us at <span>+91 4545454545</span> or email{" "}
         <span>customer.care@fitnfine.in</span>
@@ -183,4 +176,3 @@ const Joinpage = () => {
 };
 
 export default Joinpage;
-

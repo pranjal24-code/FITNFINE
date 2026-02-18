@@ -7,49 +7,67 @@ export default function OnlineSession() {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    phone: "",
     session: "",
-    memberId: "",
+    memberIdentifier: "",
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare payload for backend
-    const payload = {
-      full_name: isMember ? "Existing Member" : formData.name,
-      email: isMember ? formData.memberId : formData.email,
-      phone: "",
-      session: formData.session,
-    };
+    let payload = {};
 
-    if (!payload.session) {
-      alert("Please select a session");
-      return;
+    // ✅ Existing member
+    if (isMember) {
+      if (!formData.memberIdentifier || !formData.session) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      payload = {
+        full_name: "Existing Member",
+        email: formData.memberIdentifier, // email or phone
+        session: formData.session,
+      };
+    }
+    // ✅ New member
+    else {
+      if (!formData.full_name || !formData.email || !formData.session) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      payload = {
+        full_name: formData.full_name,
+        email: formData.email,
+        session: formData.session,
+      };
     }
 
     try {
       setLoading(true);
 
-      const res = await api.post("/online-session", payload);
+      const res = await api.post("/session", payload);
 
       alert(res.data.message || "Session booked successfully!");
 
+      // Reset form
       setFormData({
-        name: "",
+        full_name: "",
         email: "",
-        phone: "",
         session: "",
-        memberId: "",
+        memberIdentifier: "",
       });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("Online Session Error:", error);
       alert("Failed to book session");
     } finally {
       setLoading(false);
@@ -58,58 +76,37 @@ export default function OnlineSession() {
 
   return (
     <div className="session-page">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="session-hero">
         <h1>
           Join Our <span>Online Sessions</span>
         </h1>
-        <p>Train with our expert coaches from the comfort of your home.</p>
+        <p>Train with expert coaches from home.</p>
         <a href="#booking">
           <button className="book-btn">Book Your Session</button>
         </a>
       </section>
 
-      {/* Upcoming Sessions */}
-      <section className="upcoming-sessions">
-        <h2>Upcoming Live Workouts</h2>
-        <div className="sessions-grid">
-          <div className="session-card">
-            <h3>HIIT Blast</h3>
-            <p>Monday, 7:00 AM</p>
-          </div>
-          <div className="session-card">
-            <h3>Strength Training</h3>
-            <p>Wednesday, 6:00 PM</p>
-          </div>
-          <div className="session-card">
-            <h3>Zumba Dance</h3>
-            <p>Friday, 5:00 PM</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Booking Form */}
+      {/* Booking */}
       <section className="booking-form" id="booking">
         <h2>Book Your Session</h2>
 
-        <div className="member-toggle">
-          <label>
-            <input
-              type="checkbox"
-              checked={isMember}
-              onChange={() => setIsMember(!isMember)}
-            />
-            Already a member?
-          </label>
-        </div>
+        <label className="member-toggle">
+          <input
+            type="checkbox"
+            checked={isMember}
+            onChange={() => setIsMember(!isMember)}
+          />
+          Already a member?
+        </label>
 
         <form onSubmit={handleSubmit}>
           {isMember ? (
             <input
               type="text"
-              name="memberId"
+              name="memberIdentifier"
               placeholder="Enter Email or Phone"
-              value={formData.memberId}
+              value={formData.memberIdentifier}
               onChange={handleChange}
               required
             />
@@ -117,16 +114,17 @@ export default function OnlineSession() {
             <>
               <input
                 type="text"
-                name="name"
-                placeholder="Your Full Name"
-                value={formData.name}
+                name="full_name"
+                placeholder="Full Name"
+                value={formData.full_name}
                 onChange={handleChange}
                 required
               />
+
               <input
                 type="email"
                 name="email"
-                placeholder="Your Email"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -152,7 +150,7 @@ export default function OnlineSession() {
             </option>
           </select>
 
-          <button type="submit" className="submit-btn" disabled={loading}>
+          <button type="submit" disabled={loading} className="submit-btn">
             {loading ? "Booking..." : "Confirm Booking"}
           </button>
         </form>
@@ -166,14 +164,15 @@ export default function OnlineSession() {
             src="https://www.youtube.com/embed/UBMk30rjy0o"
             title="Workout 1"
             allowFullScreen
-          ></iframe>
+          />
           <iframe
             src="https://www.youtube.com/embed/ml6cT4AZdqI"
             title="Workout 2"
             allowFullScreen
-          ></iframe>
+          />
         </div>
       </section>
     </div>
   );
 }
+
