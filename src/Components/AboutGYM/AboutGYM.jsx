@@ -141,7 +141,6 @@
 import React, { useEffect, useState } from 'react';
 import './AboutGYM.css';
 import { assets } from '../../assets/assets';
-import api from '../../api';
 import { FaDumbbell, FaUserCheck, FaRunning, FaUsers } from 'react-icons/fa';
 
 const AboutGYM = () => {

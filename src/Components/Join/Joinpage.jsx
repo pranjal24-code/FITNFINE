@@ -52,7 +52,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "./joinpage.css";
-import JoinService from "../Services/JoinServies";
 
 const Joinpage = () => {
   const [formData, setFormData] = useState({
@@ -72,37 +71,40 @@ const Joinpage = () => {
     });
   };
 
-  // Handle submit ✅ (ONLY ONE)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Handle submit without Razorpay (Fake Payment Mode)
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.full_name || !formData.email || !formData.phone || !formData.plan) {
-      alert("Please fill all fields");
-      return;
-    }
+  if (!formData.full_name || !formData.email || !formData.phone || !formData.plan) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const res = await JoinService.createJoinRequest(formData);
+    // ✅ Call backend to create member
+    await JoinService.createOrder(formData);
 
+    // ✅ Direct success message
+    alert("🎉 Payment Successful! Membership Activated");
 
-      alert(res.message || "Joined successfully!");
+    // ✅ Clear form
+    setFormData({
+      full_name: "",
+      email: "",
+      phone: "",
+      plan: "",
+    });
 
-      // Clear form
-      setFormData({
-        full_name: "",
-        email: "",
-        phone: "",
-        plan: "",
-      });
-    } catch (error) {
-      console.error("Join Error:", error);
-      alert("Failed to submit join request");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Error:", error.response?.data);
+    alert(error.response?.data?.error || "Server Error");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="join-page">
@@ -116,11 +118,12 @@ const Joinpage = () => {
       </motion.h2>
 
       <p className="join-subtext">
-        Start your fitness journey today! Fill out the form below and our team will contact you.
+        Start your fitness journey today! Complete the payment to activate your membership.
       </p>
 
       <form className="join-card" onSubmit={handleSubmit}>
         <div className="join-card-content">
+
           <input
             type="text"
             name="full_name"
@@ -162,8 +165,9 @@ const Joinpage = () => {
           </select>
 
           <button className="join-button" disabled={loading}>
-            {loading ? "Submitting..." : "Submit Application"}
+            {loading ? "Processing Payment..." : "Proceed to Payment"}
           </button>
+
         </div>
       </form>
 

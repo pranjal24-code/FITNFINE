@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import api from "../../api"; // axios instance
-import "./OnlineSession.css";
+
 
 export default function OnlineSession() {
   const [isMember, setIsMember] = useState(false);

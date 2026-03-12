@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import api from "../../api"; // axios instance
 import "./Contact.css";
 
 const Contact = () => {
